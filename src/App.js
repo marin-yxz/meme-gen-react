@@ -117,7 +117,7 @@ function App() {
                 onChange={(event) => {
                   setSearch(event.target.value);
                 }}
-              ></SearchBar>
+              />
             </>
           )}
           {change === 'pass' && (
@@ -127,16 +127,16 @@ function App() {
                 src={stateTrueFalse.blank}
                 alt={stateTrueFalse.name}
                 key={stateTrueFalse.id}
-              ></Img1>
+              />
               <DivTwice>
                 <InputTwice
                   placeholder="top"
                   onChange={(event) => setTop(event.target.value)}
-                ></InputTwice>
+                />
                 <InputTwice
                   placeholder="bot"
                   onChange={(event) => setBot(event.target.value)}
-                ></InputTwice>
+                />
               </DivTwice>
               <ButtonPage
                 onClick={() => {
@@ -168,7 +168,7 @@ function App() {
               <UnList>{content}</UnList>
             </ListDiv>
           )}
-          <div className="App"></div>
+          <div className="App" />
         </MainDiv>
       </Full>
     </StrictMode>
