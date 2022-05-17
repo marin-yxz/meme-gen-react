@@ -21,14 +21,13 @@ import {
 function App() {
   const [something, setSomething] = useState([]);
   const [search, setSearch] = useState('');
-  const [stateTrueFalse, setState] = useState(false);
+  const [state, setState] = useState(false);
   const [change, setChange] = useState('');
   const [top, setTop] = useState('');
   const [bot, setBot] = useState('');
   const [img, setImg] = useState('');
-  const [show2, showImage2] = useState('');
-  const [imgURL, setimgURL] = useState('');
-  let ImgUrl;
+  const [show2, setShow2] = useState('');
+  let imgUrl;
   const handleMouseOver = (event) => {
     JSON.parse(event.target.dataset.info);
     setState(JSON.parse(event.target.dataset.info));
@@ -48,10 +47,10 @@ function App() {
 
   function processImage(id) {
     if (top === '' || bot === '') {
-      alert('Fields can' + 't' + ' be empty');
+      alert('Fields cant be empty');
     } else {
-      ImgUrl = `https://api.memegen.link/images/${id}/${top}/${bot}.png`;
-      setImg(ImgUrl);
+      imgUrl = `https://api.memegen.link/images/${id}/${top}/${bot}.png`;
+      setImg(imgUrl);
     }
   }
   const url = 'https://api.memegen.link/templates';
@@ -67,13 +66,16 @@ function App() {
   };
   let content;
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetch11();
   }, []);
   function receive() {
     content = something
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       .filter((search1) => {
         if (search === '') {
           return search1;
+          // eslint-disable-next-line sonarjs/no-duplicated-branches
         } else if (search1.name.toLowerCase().includes(search.toLowerCase())) {
           return search1;
         }
@@ -87,12 +89,12 @@ function App() {
               onMouseOver={handleMouseOver}
               onClick={() => {
                 setChange('pass');
-                stateTrueFalse(false);
+                state(false);
               }}
             >
               {image.name}
             </ButtonPage>
-            {image.name === stateTrueFalse.name && (
+            {image.name === state.name && (
               <Img1 src={image.blank} alt={image.name} key={image.id} />
             )}
           </List>
@@ -122,12 +124,8 @@ function App() {
           )}
           {change === 'pass' && (
             <>
-              <h1> {stateTrueFalse.name}</h1>
-              <Img1
-                src={stateTrueFalse.blank}
-                alt={stateTrueFalse.name}
-                key={stateTrueFalse.id}
-              />
+              <h1> {state.name}</h1>
+              <Img1 src={state.blank} alt={state.name} key={state.id} />
               <DivTwice>
                 <InputTwice
                   placeholder="top"
@@ -140,8 +138,8 @@ function App() {
               </DivTwice>
               <ButtonPage
                 onClick={() => {
-                  processImage(stateTrueFalse.id);
-                  showImage2('show');
+                  processImage(state.id);
+                  setShow2('show');
                 }}
               >
                 Get image
@@ -155,7 +153,7 @@ function App() {
                       src={img}
                       alt="icons"
                       onClick={() => {
-                        downloadImage(img);
+                        downloadImage(img).catch({});
                       }}
                     />
                   </SecondPictureDiv>
