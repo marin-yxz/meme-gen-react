@@ -93,7 +93,7 @@ function App() {
               {image.name}
             </ButtonPage>
             {image.name === stateTrueFalse.name && (
-              <Img1 src={image.blank} alt={image.name} key={image.id}/>
+              <Img1 src={image.blank} alt={image.name} key={image.id} />
             )}
           </List>
         );
